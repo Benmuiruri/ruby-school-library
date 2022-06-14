@@ -8,7 +8,7 @@ class Person
   attr_writer :name, :age
 
   def can_use_services?
-    is_of_age ? true : false
+    is_of_age? || parent_permission
   end
 
   private
@@ -16,4 +16,4 @@ class Person
     @age >= 18 ? true : false
    end
   end
-end
+end 
