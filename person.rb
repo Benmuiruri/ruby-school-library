@@ -1,4 +1,6 @@
-class Person
+require "./nameable.rb"
+
+class Person < Nameable
   attr_accessor :name, :age
   attr_reader :id
 
@@ -13,9 +15,17 @@ class Person
     of_age? || @parent_permission
   end
 
+  def correct_name
+    name
+  end
+
   private
 
   def of_age?
     @age >= 18
   end
+end
+
+class Decorator < Nameable
+  
 end
