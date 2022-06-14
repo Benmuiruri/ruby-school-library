@@ -37,3 +37,9 @@ class Decorator < Nameable
     @component.correct_name
   end
 end
+
+class CapitalizeDecorator < Decorator
+  def correct_name
+    @component.correct_name.capitalize
+  end
+end
