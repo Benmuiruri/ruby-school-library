@@ -4,9 +4,9 @@
 > This repo hosts a nifty ruby program for a library at the OOP University. 
 > The program allows you to record what books are in the library and who borrows them. The app allows the librarian to:
 
--Add new students or teachers.
--Add new books.
--Save records of who borrowed a given book and when.
+- Add new students or teachers.
+- Add new books.
+- Save records of who borrowed a given book and when.
 
 
 ## Built With
