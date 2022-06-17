@@ -56,7 +56,7 @@ class App
     when '5'
       puts 'Great, let\'s rent a book...'
       sleep 0.5
-      display_options
+      create_rental
     when '6'
       puts 'Loading the list of all rented books...'
       sleep 0.75
@@ -147,4 +147,9 @@ def list_books
   @books.each { |book| puts "Title: #{book.title} by Author: #{book.author}" }
   sleep 0.75
   display_options
+end
+
+def create_rental
+  puts 'Select a book from the following list of books [Enter book ID]: '
+  
 end
