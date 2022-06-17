@@ -40,11 +40,11 @@ class App
     when '1'
       puts 'Loading the list of all books...'
       sleep 0.75
-      display_options
+      list_books
     when '2'
       puts 'Loading the list of all people...'
       sleep 0.75
-      display_options
+      list_people
     when '3'
       puts 'Great, let\'s add a person...'
       sleep 0.5
@@ -121,6 +121,13 @@ def create_teacher
   display_options
 end
 
+def list_people
+  puts 'There are no people in the library. Please add a student or teacher' if @people.empty?
+  @people.each { |person| puts "[#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
+  sleep 0.75
+  display_options
+end
+
 def create_book
   print 'Enter Title: '
   title = gets.chomp
@@ -132,4 +139,12 @@ def create_book
   @books << book
 
   puts "Book #{title} created successfully"
+  display_options
+end
+
+def list_books
+  puts 'There are no books in the library. Please add a book' if @books.empty?
+  @books.each { |book| puts "Title: #{book.title} by Author: #{book.author}" }
+  sleep 0.75
+  display_options
 end
