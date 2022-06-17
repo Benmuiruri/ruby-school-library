@@ -187,7 +187,7 @@ def list_rentals
     create_rental
   else
     print 'Enter ID of person: '
-    person_id = gets.chomp.to_i
+    person_id = gets.chomp
     sleep 0.75
     rental_list = @rentals.select { |rental| rental.person.id == person_id }
     if rental_list.empty?
