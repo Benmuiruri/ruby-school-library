@@ -123,7 +123,9 @@ end
 
 def list_people
   puts 'There are no people in the library. Please add a student or teacher' if @people.empty?
-  @people.each_with_index { |person, index| puts "#{index} [#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
+  @people.each_with_index do |person, index|
+    puts "#{index} [#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+  end
   sleep 0.75
   display_options
 end
@@ -150,6 +152,28 @@ def list_books
 end
 
 def create_rental
-  puts 'Select a book from the following list of books [Enter book ID]: '
+  if @books.empty?
+    puts 'Please add a book first'
+    create_book
+  elsif @people.empty?
+    puts 'Please add a person first'
+    create_person
+  else
+    puts 'Select a book from the following list of books [Enter book ID]: '
+    @books.each_with_index { |book, index| puts "Index: #{index}) Title: #{book.title} by Author: #{book.author}" }
+    book_id = gets.chomp.to_i
+    puts 'Select the person renting the book [Enter Person Index not ID]: '
+    @people.each_with_index do |person, index|
+      puts "Index: #{index}) [#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+    end
+    person_id = gets.chomp.to_i
+    puts 'Enter date (Format: 2020/05/04): '
+    date = gets.chomp.to_s
 
+    rental = Rental.new(date, @people[person_id], @books[book_id])
+    @rentals << rental
+    puts "Book: #{@books[book_id].title} rented successfully"
+    sleep 0.75
+  end
+  display_options
 end
