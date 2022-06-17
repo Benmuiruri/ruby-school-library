@@ -123,7 +123,7 @@ end
 
 def list_people
   puts 'There are no people in the library. Please add a student or teacher' if @people.empty?
-  @people.each { |person| puts "[#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
+  @people.each_with_index { |person, index| puts "#{index} [#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
   sleep 0.75
   display_options
 end
@@ -144,12 +144,12 @@ end
 
 def list_books
   puts 'There are no books in the library. Please add a book' if @books.empty?
-  @books.each { |book| puts "Title: #{book.title} by Author: #{book.author}" }
+  @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title} by Author: #{book.author}" }
   sleep 0.75
   display_options
 end
 
 def create_rental
   puts 'Select a book from the following list of books [Enter book ID]: '
-  
+
 end
