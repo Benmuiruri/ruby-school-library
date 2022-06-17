@@ -58,12 +58,13 @@ class App
       sleep 0.5
       create_rental
     when '6'
-      puts 'Loading the list of all rented books...'
+      puts 'List all rentals for a given person id'
       sleep 0.75
-      display_options
+      list_rentals
     when '7'
       puts 'Thank you for using the School Library App. See you next time!'
       sleep 0.75
+      exit
     else
       puts 'Invalid choice! Please enter a valid choice (1-7)'
     end
@@ -174,6 +175,31 @@ def create_rental
     @rentals << rental
     puts "Book: #{@books[book_id].title} rented successfully"
     sleep 0.75
+  end
+  display_options
+end
+
+def list_rentals
+  if @rentals.empty?
+    puts 'Please add a rental first.'
+    create_rental
+  else
+    print 'Enter ID of person: '
+    person_id = gets.chomp.to_i
+    sleep 0.75
+    rental_list = @rentals.select { |rental| rental.person.id == person_id }
+    if rental_list.empty?
+      puts "No rentals found for person with ID: #{person_id}."
+      puts 'These are the available people in the library database'
+      @people.each_with_index do |person, index|
+        puts "Index: #{index}) [#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+      end
+    else
+      puts "These are the rented books for Selected person"
+      rental_list.each do |rental|
+        puts "#{rental.person.name} rented Book:\"#{rental.book.title}\" by Author:\"#{rental.book.author}\" on Date: #{rental.date},"
+      end
+    end
   end
   display_options
 end
