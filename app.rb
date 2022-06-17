@@ -4,6 +4,7 @@ require './teacher'
 require './classroom'
 require './book'
 require './rental'
+# rubocop:disable Metrics
 
 class App
   def initialize
@@ -102,6 +103,7 @@ class App
     name = person_name_input
     print 'Has parent permission? [Y/N]: '
     parent_permission = gets.chomp.downcase
+    puts 'Thank you for giving permission' if parent_permission
     student = Student.new(age, name, @class)
     @people << student
     puts "Student #{name} created successfully"
@@ -195,11 +197,12 @@ def list_rentals
         puts "Index: #{index}) [#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
       end
     else
-      puts "These are the rented books for Selected person"
+      puts 'These are the rented books for Selected person'
       rental_list.each do |rental|
-        puts "#{rental.person.name} rented Book:\"#{rental.book.title}\" by Author:\"#{rental.book.author}\" on Date: #{rental.date},"
+        puts "#{rental.person.name} rented \"#{rental.book.title}\" by \"#{rental.book.author}\" on #{rental.date},"
       end
     end
   end
   display_options
 end
+# rubocop:enable Metrics
