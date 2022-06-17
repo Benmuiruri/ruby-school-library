@@ -52,7 +52,7 @@ class App
     when '4'
       puts 'Great, let\'s add a book...'
       sleep 0.5
-      display_options
+      create_book
     when '5'
       puts 'Great, let\'s rent a book...'
       sleep 0.5
@@ -119,4 +119,17 @@ def create_teacher
   puts "Teacher #{name} created successfully"
   sleep 0.5
   display_options
+end
+
+def create_book
+  print 'Enter Title: '
+  title = gets.chomp
+
+  print 'Enter Author Name: '
+  author = gets.chomp
+
+  book = Book.new(title, author)
+  @books << book
+
+  puts "Book #{title} created successfully"
 end
