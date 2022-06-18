@@ -189,6 +189,7 @@ def list_rentals
     print 'Enter ID of person: '
     person_id = gets.chomp
     sleep 0.75
+    binding.pry
     rental_list = @rentals.select { |rental| rental.person.id == person_id }
     if rental_list.empty?
       puts "No rentals found for person with ID: #{person_id}."
