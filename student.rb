@@ -2,8 +2,8 @@ $LOAD_PATH << '.'
 require 'person'
 
 class Student < Person
-  def initialize(age, name, classroom, parent_permission: true)
-    super(age, name, parent_permission: parent_permission)
+  def initialize(age, name, classroom, parent_permission)
+    super(age, name, parent_permission)
     @classroom = classroom
   end
 
