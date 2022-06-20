@@ -15,7 +15,7 @@ class App
   end
 
   def run
-    puts 'Welcome to School Library App (Another Ben Project)'
+    puts "Welcome to School Library App (Another Ben Project)\n\n"
     sleep 0.5
     display_options
   end
@@ -125,7 +125,7 @@ def create_teacher
 end
 
 def list_people
-  puts 'There are no people in the library. Please add a student or teacher' if @people.empty?
+  puts "There are no people in the library. Please add a student or teacher\n" if @people.empty?
   @people.each_with_index do |person, index|
     puts "#{index} [#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
   end
@@ -148,7 +148,7 @@ def create_book
 end
 
 def list_books
-  puts 'There are no books in the library. Please add a book' if @books.empty?
+  puts "There are no books in the library. Please add a book\n" if @books.empty?
   @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title} by Author: #{book.author}" }
   sleep 0.75
   display_options
@@ -156,10 +156,10 @@ end
 
 def create_rental
   if @books.empty?
-    puts 'Please add a book first'
+    puts "Please add a book first\n\n"
     create_book
   elsif @people.empty?
-    puts 'Please add a person first'
+    puts "Please add a person first\n\n"
     create_person
   else
     puts 'Select a book from the following list of books [Enter book ID]: '
@@ -175,7 +175,7 @@ def create_rental
 
     rental = Rental.new(date, @people[person_id], @books[book_id])
     @rentals << rental
-    puts "Book: #{@books[book_id].title} rented successfully"
+    puts "Book: #{@books[book_id].title} rented successfully\n"
     sleep 0.75
   end
   display_options
@@ -187,17 +187,18 @@ def list_rentals
     create_rental
   else
     print 'Enter ID of person: '
-    person_id = gets.chomp.to_i
+    person_id = gets.chomp
     sleep 0.75
+    binding.pry
     rental_list = @rentals.select { |rental| rental.person.id == person_id }
     if rental_list.empty?
       puts "No rentals found for person with ID: #{person_id}."
-      puts 'These are the available people in the library database'
+      puts "These are the available people in the library database\n\n"
       @people.each_with_index do |person, index|
         puts "Index: #{index}) [#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
       end
     else
-      puts 'These are the rented books for Selected person'
+      puts "These are the rented books for Selected person\n\n"
       rental_list.each do |rental|
         puts "#{rental.person.name} rented \"#{rental.book.title}\" by \"#{rental.book.author}\" on #{rental.date},"
       end
