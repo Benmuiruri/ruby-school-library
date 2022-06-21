@@ -4,26 +4,28 @@ require './teacher'
 require './classroom'
 require './book'
 require './rental'
+require 'pry'
 
 class App
   attr_accessor :books, :people
 
   def initialize
-  @people = []
     @books = []
+    @people = []
     @rentals = []
     @class = Classroom.new('Grade 7')
   end
+
+   def all_books
+    books
+  end
+
+  def all_people
+    people
+  end
   
-  def add_person(person_option, age, name, arg)
-    case person_option
-    when 1
-      student = Student.new(age, name, @class, arg)
-      @people << student unless @people.include?(student)
-    when 2
-      teacher = Teacher.new(age, name, arg)
-      @people << teacher unless @people.include?(teacher)
-    end
+  def add_person(person)
+      @people << person unless @people.include?(person)
   end
 
   def add_book(title, author)

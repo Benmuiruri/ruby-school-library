@@ -13,12 +13,12 @@ end
 
 def create_person
   print 'Do you want to create a student (1) or a teacher (2) [Input the number]: '
-  person_option = gets.chomp
+  person_option = gets.chomp.to_i
 
   case person_option
-  when '1'
+  when 1
     create_student(person_option)
-  when '2'
+  when 2
     create_teacher(person_option)
   else
     puts 'Invalid input: Please type 1 or 2'
@@ -42,9 +42,10 @@ def create_student(person_option)
   age = person_age_input
   name = person_name_input
   print 'Has parent permission? [Y/N]: '
-  parent_permission = gets.chomp.downcase
-  puts 'Thank you for giving permission' if parent_permission
-  @my_app.add_person(person_option, age, name, parent_permission)
+  _parent_permission = gets.chomp.downcase
+  puts 'Thank you for giving permission'
+  student = Student.new(age, name, @my_app.class)
+  @my_app.add_person(student)
   puts "Student #{name} created successfully"
   sleep 0.5
 end
@@ -54,7 +55,8 @@ def create_teacher(person_option)
   name = person_name_input
   print 'Area of specialization [e.g. Physics]: '
   specialization = gets.chomp
-  @my_app.add_person(person_option, age, name, specialization)
+  teacher = Teacher.new(age, specialization, name)
+  @my_app.add_person(teacher)
   puts "Teacher #{name} created successfully"
   sleep 0.5
 end
@@ -75,7 +77,6 @@ def create_rental
   elsif @my_app.people.empty?
     puts "Please add a person first\n\n"
     create_person
-    binding.pry
   else
     puts 'Select a book from the following list of books [Enter book ID]: '
     @my_app.books.each_with_index do |book, index|
